@@ -2,7 +2,7 @@
 This repository contains the code for Semantic Temporal Rebalance-Aware Audio-Visual Event Localization.
 
 ## Our Framework
-![Framework](figures/framework.png)
+![Framework](figure/framework.png)
 ## Data Preparation
 The AVE dataset can be downloaded from https://github.com/YapengTian/AVE-ECCV18. Other preprocessed files used in this repository can be downloaded from here. All the required data are listed as below, and these files should be placed into the folder.`data`
 
