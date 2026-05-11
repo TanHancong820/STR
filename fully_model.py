@@ -291,7 +291,7 @@ class CrossAttention(nn.Module):
     输入 shape: (B, T, D)
     输出 shape: (B, T, D)
     """
-    def __init__(self, embed_dim=512, n_heads=16, n_layers=3, dropout=0.1):
+    def __init__(self, embed_dim=512, n_heads=8, n_layers=2, dropout=0.1):
         super().__init__()
         self.layers = nn.ModuleList()
 
@@ -346,12 +346,12 @@ class CrossAttention(nn.Module):
 
 
 # --------------------
-# 主模型 psp_net (第二阶段版本: 保持原逻辑, 增加 AudioAttentionPool + TemporalCrossTransformer)
+# 主模型 str_net (第二阶段版本: 保持原逻辑, 增加 AudioAttentionPool + TemporalCrossTransformer)
 # --------------------
-class psp_net(nn.Module):
+class str_net(nn.Module):
     def __init__(self, a_dim=2048, v_dim=512, hidden_dim=256, category_num=29,
                  device=None, use_kd=True, kd_lambda=0.6, kd_T=4):
-        super(psp_net, self).__init__()
+        super(str_net, self).__init__()
         self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
         self.category_num = category_num
         self.hidden_dim = hidden_dim
@@ -412,7 +412,7 @@ class psp_net(nn.Module):
         # Student head for KD
         self.video_cls_head = nn.Linear(hidden_dim * 2, category_num)
 
-        # 可学习缩放参数（PSP 残差缩放）
+        # 可学习缩放参数（str 残差缩放）
         # self.alpha_v = nn.Parameter(torch.tensor(0.5))
         # self.alpha_a = nn.Parameter(torch.tensor(0.5))
 
@@ -530,8 +530,7 @@ class psp_net(nn.Module):
         V_prime = lstm_video * sim_combined.unsqueeze(-1)
         A_prime = lstm_audio * sim_combined.unsqueeze(-1)
 
-        # V_psp = lstm_video + self.alpha_v * V_prime
-        # A_psp = lstm_audio + self.alpha_a * A_prime
+        
         fused_per_seg = 0.5 * (V_prime + A_prime)
 
         # ---------- Fusion head ----------
