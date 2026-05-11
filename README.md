@@ -17,10 +17,18 @@ Note:  The extracted audio and visual features can be downloaded [here](https://
 ```bash
   python fully_supervised_main.py --model_name STR --train
 ```
+* **Test:**
+```bash
+  python fully_supervised_main.py --model_name STR --trained_model_path ./model/STR_fully.pt
+```
 
 ## Weakly supervised setting
 * **Train:**
 ```bash
   python weakly_supervised_main.py --model_name STR --train
+```
+* **Test:**
+```bash
+  python weakly_supervised_main.py --model_name STR --trained_model_path ./model/STR_weakly.pt
 ```
 Note: The pre-trained models can be downloaded [here](https://pan.quark.cn/s/a5c0bfa1d5b6) and they should be placed into the folder. `model`
