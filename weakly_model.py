@@ -346,11 +346,11 @@ class CrossAttention(nn.Module):
 
 
 # --------------------
-# 主模型 psp_net (第二阶段版本: 保持原逻辑)
+# 主模型 str_net (第二阶段版本: 保持原逻辑)
 # --------------------
-class psp_net(nn.Module):
+class str_net(nn.Module):
     def __init__(self, a_dim=2048, v_dim=512, hidden_dim=256, category_num=29, device=None):
-        super(psp_net, self).__init__()
+        super(str_net, self).__init__()
         self.device = device if device else ("cuda" if torch.cuda.is_available() else "cpu")
         self.category_num = category_num
         self.hidden_dim = hidden_dim
@@ -515,7 +515,7 @@ class psp_net(nn.Module):
         out = self.relu(self.L1(fusion))
         out = self.L2(out)
 
-        # ---------- temporal weighting (PSP-style) ----------
+        # ---------- temporal weighting (STR-style) ----------
         score = out
         temporal_wei = torch.sigmoid(self.W3(score))
         score = score * temporal_wei
