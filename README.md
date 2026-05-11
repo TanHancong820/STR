@@ -22,3 +22,4 @@ train_order.h5    val_order.h5       test_order.h5
 ```bash
   python weakly_supervised_main.py --model_name STR --train
 ```
+Note: The pre-trained models can be downloaded [here](https://pan.quark.cn/s/a5c0bfa1d5b6) and they should be placed into the folder. `model`
