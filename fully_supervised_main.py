@@ -11,7 +11,7 @@ import torch.optim as optim
 from torch.optim.lr_scheduler import StepLR
 
 from dataloader import AVE_Fully_Dataset
-from fully_model import psp_net
+from fully_model import str_net
 from measure import compute_acc, AVPSLoss
 from Optim import ScheduledOptim
 
@@ -28,7 +28,7 @@ parser = argparse.ArgumentParser(description='Fully supervised AVE localization'
 # ==========================================================
 
 # data
-parser.add_argument('--model_name', type=str, default='PSP', help='model name')
+parser.add_argument('--model_name', type=str, default='STR', help='model name')
 parser.add_argument('--dir_video', type=str, default="./data/video_clip_feature_1frame_vitl14_gat_residual.h5", help='visual features')
 parser.add_argument('--dir_audio', type=str, default='./data/audio_embedding.h5', help='audio features')
 parser.add_argument('--dir_labels', type=str, default='./data/right_labels.h5', help='labels of AVE dataset')
@@ -44,7 +44,7 @@ parser.add_argument('--check_epoch', type=int, default=5, help='number of epoch 
 parser.add_argument('--LAMBDA', type=float, default=1, help='weight for balancing losses')
 parser.add_argument('--threshold', type=float, default=0.099, help='key-parameter for pruning process')
 parser.add_argument('--clip_lambda', type=float, default=1, help='weight for CLIP similarity supervision')
-parser.add_argument('--use_kd', action='store_true', default=True, help='enable knowledge distillation inside psp_net')
+parser.add_argument('--use_kd', action='store_true', default=True, help='enable knowledge distillation inside str_net')
 parser.add_argument('--kd_lambda', type=float, default=0.6, help='weight for KD loss')
 parser.add_argument('--kd_T', type=float, default=4.0, help='temperature T used inside KD (used by model if use_kd)')
 
@@ -292,9 +292,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print("args: ", args)
 
-    if args.model_name == "PSP":
+    if args.model_name == "STR":
         # pass use_kd flag and KD params to model so model internal forward can compute loss_kd when enabled
-        net_model = psp_net(a_dim=2048, v_dim=512, category_num=29,
+        net_model = str_net(a_dim=2048, v_dim=512, category_num=29,
                             use_kd=args.use_kd, kd_lambda=args.kd_lambda, kd_T=args.kd_T)
     else:
         raise NotImplementedError
