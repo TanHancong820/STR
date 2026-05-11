@@ -10,6 +10,7 @@ The AVE dataset can be downloaded from https://github.com/YapengTian/AVE-ECCV18.
 right_label.h5    prob_label.h5      labels_noisy.h5         mil_labels.h5
 train_order.h5    val_order.h5       test_order.h5
 ```
+Note:  The extracted audio and visual features can be downloaded [here](https://pan.quark.cn/s/e8d4e3c7ae28) and they should be placed into the folder. `data`
 
 ## Fully supervised setting
 * **Train:**
