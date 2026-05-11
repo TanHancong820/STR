@@ -8,7 +8,7 @@ The AVE dataset can be downloaded from https://github.com/YapengTian/AVE-ECCV18.
 
 ```text
 right_label.h5    prob_label.h5      labels_noisy.h5         mil_labels.h5
-train_order.h5    val_order.h5       test_order.h5
+train_order.h5    val_order.h5       test_order.h5 ```
 
 ## Fully supervised setting
 * **Train:**
