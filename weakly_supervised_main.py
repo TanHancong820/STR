@@ -11,7 +11,7 @@ from torch.optim.lr_scheduler import StepLR
 from Optim import ScheduledOptim
 
 from dataloader import AVE_Weakly_Dataset
-from weakly_model import psp_net
+from weakly_model import str_net
 from measure import compute_acc
 
 import os
@@ -26,7 +26,7 @@ import pdb
 parser = argparse.ArgumentParser(description='Weakly supervised AVE Localization')
 
 # Data specifications
-parser.add_argument('--model_name', type=str, default='PSP', help='model name')
+parser.add_argument('--model_name', type=str, default='STR', help='model name')
 parser.add_argument('--dir_video', type=str, default="./data/video_clip_feature_1frame_vitl14_gat_residual.h5", help='visual features')
 parser.add_argument('--dir_audio', type=str, default='./data/audio_embedding.h5', help='audio features')
 parser.add_argument('--dir_labels', type=str, default='./data/mil_labels.h5', help='labels of AVE dataset')
@@ -264,8 +264,8 @@ if __name__ == "__main__":
 
     # model and optimizer
     model_name = args.model_name
-    if model_name == "PSP":
-        net_model = psp_net(2048, 512, 256, 29)
+    if model_name == "STR":
+        net_model = str_net(2048, 512, 256, 29)
     else:
         raise NotImplementedError
     net_model.cuda()
